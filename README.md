@@ -4,8 +4,14 @@
 
 < 실전형 리액트 Hooks 10개 > 강의를 듣고 React의 hooks에 대해 깊이 공부합니다.
 
+## usState
+
+- [✅] useInput
+- [✅] useTabs
+
+## useEffect
+
 - [ ] useTitle
-- [ ] useInput
 - [ ] usePageLeave
 - [ ] useClick
 - [ ] useFadeIn
@@ -14,7 +20,6 @@
 - [ ] useNetwork
 - [ ] useNotification
 - [ ] useScroll
-- [ ] useTabs
 - [ ] usePreventLeave
 - [ ] useConfirm
 - [ ] useAxios
