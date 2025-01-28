@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
+import useInput from './useInput';
 import './index.css';
 import './App.css';
 
 // update an input
-const useInput = initialValue => {
-	const [value, setValue] = useState(initialValue);
-	const onChange = event => {
-		console.log(event.target);
-	};
-	return { value, onChange };
-};
 
 const App = () => {
-	const name = useInput('Ms.');
+	// const maxLength = value => value.length <= 10;
+	const noEmail = value => !value.includes('@');
+	const name = useInput('Ms.', noEmail);
 	return (
 		<div className="App">
 			<h1>Hello</h1>
