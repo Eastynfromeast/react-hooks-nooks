@@ -1,29 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './App.css';
 
-// usePreventLeave - warn when the user is trying to leave without saving before
-const usePreventLeave = () => {
-	const listener = event => {
-		event.preventDefault();
-		event.returnValue = '';
+const useBeforeLeave = onBefore => {
+	const handle = event => {
+		const { clientY } = event;
+		if (clientY <= 0) {
+			onBefore();
+		}
 	};
-	const enablePrevent = () => {
-		window.addEventListener('beforeunload', listener);
-	};
-	const disablePrevent = () => {
-		window.removeEventListener('beforeunload', listener);
-	};
-	return { enablePrevent, disablePrevent };
+	useEffect(() => {
+		if (typeof onBefore !== 'function') {
+			return;
+		}
+		document.addEventListener('mouseleave', handle);
+		return () => {
+			document.removeEventListener('mouseleave', handle);
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 };
+
 const App = () => {
-	const { enablePrevent, disablePrevent } = usePreventLeave();
-	return (
-		<div className="App">
-			<button onClick={enablePrevent}>Protect</button>
-			<button onClick={disablePrevent}>UnProtect</button>
-		</div>
-	);
+	const begForLife = () => console.log("Pleeease don't leave...");
+	useBeforeLeave(begForLife);
+	return <div className="App"></div>;
 };
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

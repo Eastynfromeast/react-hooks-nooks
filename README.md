@@ -15,11 +15,11 @@
 - [✅] useClick
 - [✅] useHover <- useClick과 동일
 - [✅] useConfirm
-- [ ] usePageLeave
+- [✅] usePreventLeave
+- [ ] useBeforeLeave
 - [ ] useFadeIn
 - [ ] useFullScreen
 - [ ] useNetwork
 - [ ] useNotification
 - [ ] useScroll
-- [ ] usePreventLeave
 - [ ] useAxios
