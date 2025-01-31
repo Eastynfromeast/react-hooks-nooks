@@ -1,14 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './App.css';
-import useClick from './hooks/useClick';
+
+const useConfirm = (message = '', callback, rejection) => {
+	if (typeof callback !== 'function') {
+		return;
+	}
+
+	const confirmAction = () => {
+		// eslint-disable-next-line no-restricted-globals
+		if (confirm(message)) {
+			callback();
+		} else {
+			rejection();
+		}
+	};
+	return confirmAction;
+};
 
 const App = () => {
-	const sayHello = () => console.log('say Hello');
-	const title = useClick(sayHello);
+	const deleteWord = () => console.log('Deleting the word...');
+	const abort = () => console.log('Aborted');
+	const confirmDelete = useConfirm('R u sure?', deleteWord, abort);
 	return (
 		<div className="App">
-			<h1 ref={title}>Hi</h1>
+			<button onClick={confirmDelete}>Delete the word</button>
 		</div>
 	);
 };

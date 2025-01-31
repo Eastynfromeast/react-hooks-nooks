@@ -11,15 +11,15 @@
 
 ## useEffect
 
-- [ ] useTitle
+- [✅] useTitle
+- [✅] useClick
+- [✅] useHover <- useClick과 동일
+- [✅] useConfirm
 - [ ] usePageLeave
-- [ ] useClick
 - [ ] useFadeIn
 - [ ] useFullScreen
-- [ ] useHover
 - [ ] useNetwork
 - [ ] useNotification
 - [ ] useScroll
 - [ ] usePreventLeave
-- [ ] useConfirm
 - [ ] useAxios
