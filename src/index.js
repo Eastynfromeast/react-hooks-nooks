@@ -2,29 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './App.css';
 
-const useConfirm = (message = '', callback, rejection) => {
-	if (typeof callback !== 'function') {
-		return;
-	}
-
-	const confirmAction = () => {
-		// eslint-disable-next-line no-restricted-globals
-		if (confirm(message)) {
-			callback();
-		} else {
-			rejection();
-		}
+// usePreventLeave - warn when the user is trying to leave without saving before
+const usePreventLeave = () => {
+	const listener = event => {
+		event.preventDefault();
+		event.returnValue = '';
 	};
-	return confirmAction;
+	const enablePrevent = () => {
+		window.addEventListener('beforeunload', listener);
+	};
+	const disablePrevent = () => {
+		window.removeEventListener('beforeunload', listener);
+	};
+	return { enablePrevent, disablePrevent };
 };
-
 const App = () => {
-	const deleteWord = () => console.log('Deleting the word...');
-	const abort = () => console.log('Aborted');
-	const confirmDelete = useConfirm('R u sure?', deleteWord, abort);
+	const { enablePrevent, disablePrevent } = usePreventLeave();
 	return (
 		<div className="App">
-			<button onClick={confirmDelete}>Delete the word</button>
+			<button onClick={enablePrevent}>Protect</button>
+			<button onClick={disablePrevent}>UnProtect</button>
 		</div>
 	);
 };
