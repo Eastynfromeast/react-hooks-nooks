@@ -1,38 +1,35 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './App.css';
 
-// useFadeIn
-const useFadeIn = (duration = 3, delay = 0) => {
-	const element = useRef();
-
+// useNetwork will show the stauts of the network of the browser
+const useNetwork = onChange => {
+	const [status, setStatus] = useState(navigator.onLine || true);
+	const handleChange = () => {
+		if (typeof onChange === 'function') {
+			onChange(navigator.online);
+		}
+		setStatus(navigator.online);
+	};
 	useEffect(() => {
-		if (typeof duration !== 'number' || typeof delay !== 'number') {
-			return;
-		}
-		const current = element.current;
-		if (current) {
-			/*
-			css animation으로 수정하면 이렇게
-			current.style.animation = `fadeIn ${duration}s ease-in ${delay}s forwards`;
-			*/
-			// JS 로 수정하려면 이렇게
-			setTimeout(() => {
-				current.style.opacity = 1;
-				current.style.transition = `opacity ${duration}s ease-in`;
-			}, delay);
-		}
-	}, [duration, delay]);
-	return { ref: element, style: { opacity: 0 } };
+		window.addEventListener('online', handleChange);
+		window.addEventListener('offline', handleChange);
+		return () => {
+			window.removeEventListener('online', handleChange);
+			window.removeEventListener('offline', handleChange);
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [status]);
+	return status;
 };
 
 const App = () => {
-	const fadeInH1 = useFadeIn(3, 100);
-	const fadeInP = useFadeIn(5, 1000);
+	const handleNetworkChange = () => console.log(onLine ? 'We just went online' : 'we are offline');
+	const onLine = useNetwork(handleNetworkChange);
 	return (
 		<div className="App">
-			<h1 {...fadeInH1}>Element</h1>
-			<p {...fadeInP}> lorem ipsum blah blah blah</p>
+			<h1>Network status : {onLine ? 'Online' : 'Offline'}</h1>
+			<h2>{onLine ? 'Online' : 'Offline'}</h2>
 		</div>
 	);
 };

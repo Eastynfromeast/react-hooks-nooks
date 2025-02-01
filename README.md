@@ -18,8 +18,8 @@
 - [✅] usePreventLeave
 - [✅] useBeforeLeave
 - [✅] useFadeIn
+- [✅] useNetwork
 - [ ] useFullScreen
-- [ ] useNetwork
 - [ ] useNotification
 - [ ] useScroll
 - [ ] useAxios
