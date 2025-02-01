@@ -16,8 +16,8 @@
 - [✅] useHover <- useClick과 동일
 - [✅] useConfirm
 - [✅] usePreventLeave
-- [ ] useBeforeLeave
-- [ ] useFadeIn
+- [✅] useBeforeLeave
+- [✅] useFadeIn
 - [ ] useFullScreen
 - [ ] useNetwork
 - [ ] useNotification
