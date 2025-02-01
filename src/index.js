@@ -4,12 +4,12 @@ import './App.css';
 
 // useNetwork will show the stauts of the network of the browser
 const useNetwork = onChange => {
-	const [status, setStatus] = useState(navigator.onLine || true);
+	const [status, setStatus] = useState(navigator.onLine);
 	const handleChange = () => {
 		if (typeof onChange === 'function') {
-			onChange(navigator.online);
+			onChange(navigator.onLine);
 		}
-		setStatus(navigator.online);
+		setStatus(navigator.onLine);
 	};
 	useEffect(() => {
 		window.addEventListener('online', handleChange);
@@ -19,17 +19,16 @@ const useNetwork = onChange => {
 			window.removeEventListener('offline', handleChange);
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [status]);
+	}, []);
 	return status;
 };
 
 const App = () => {
-	const handleNetworkChange = () => console.log(onLine ? 'We just went online' : 'we are offline');
+	const handleNetworkChange = online => console.log(online ? 'We just went online' : 'we are offline');
 	const onLine = useNetwork(handleNetworkChange);
 	return (
 		<div className="App">
 			<h1>Network status : {onLine ? 'Online' : 'Offline'}</h1>
-			<h2>{onLine ? 'Online' : 'Offline'}</h2>
 		</div>
 	);
 };
