@@ -20,6 +20,6 @@
 - [✅] useFadeIn
 - [✅] useNetwork
 - [✅] useScroll
-- [ ] useFullScreen
+- [✅] useFullScreen
 - [ ] useNotification
 - [ ] useAxios

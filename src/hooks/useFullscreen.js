@@ -1,8 +1,6 @@
-import React, { useRef } from 'react';
-import ReactDOM from 'react-dom/client';
-import './App.css';
+import { useRef } from 'react';
 
-const useFullscreen = callback => {
+export const useFullscreen = callback => {
 	const element = useRef();
 	const runCallback = isFull => {
 		if (callback && typeof callback === 'function') {
@@ -39,27 +37,3 @@ const useFullscreen = callback => {
 	};
 	return { element, triggerFullScr, exitFullScr };
 };
-
-const App = () => {
-	const onFullScr = isFull => {
-		console.log(isFull ? 'We are full' : 'We are not full');
-	};
-	const { element, triggerFullScr, exitFullScr } = useFullscreen(onFullScr);
-	return (
-		<div className="App">
-			<h1> useFullscreen </h1>
-			<div ref={element}>
-				<img src="https://avatars.githubusercontent.com/u/95607479?v=4" alt="my github account" />
-				<button onClick={exitFullScr}>Exit fullscreen</button>
-			</div>
-			<button onClick={triggerFullScr}>Make fullscreen</button>
-		</div>
-	);
-};
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>
-);
