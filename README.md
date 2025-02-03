@@ -22,4 +22,4 @@
 - [✅] useScroll
 - [✅] useFullScreen
 - [✅] useNotification
-- [ ] useAxios
+- [✅] useAxios
