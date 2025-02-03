@@ -21,5 +21,5 @@
 - [✅] useNetwork
 - [✅] useScroll
 - [✅] useFullScreen
-- [ ] useNotification
+- [✅] useNotification
 - [ ] useAxios
